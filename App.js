@@ -1,24 +1,37 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text,
-  View, ToastAndroid, TouchableOpacity, Image } from "react-native";
+  View, ToastAndroid, TouchableOpacity, Image,
+  TextInput
+ } from "react-native";
 
 export default class App extends Component {
+  state = {
+    text: ''
+  }
+
   taste(){
-    ToastAndroid
+    /*ToastAndroid
       .showWithGravity("😋😋 Awesome...Nice Toast 🍔🍔 😋",
-        ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+        ToastAndroid.SHORT, ToastAndroid.BOTTOM)*/
+    alert("😋Your word is:"+this.state.text)
   }
 
   render() {
     return (
       <View style={styles.main}>
         <View style={styles.firstView}>
-          {/*<Text style={[styles.txt, {color:"#fff"}]}>
+          <TextInput
+            style={styles.input}
+            placeholder="Type here..."
+            onChangeText={(txt)=>{
+              //console.log(txt)
+              this.setState({text:txt})
+            }}
+           />
+          <Text style={[styles.txt, {color:"#fff"}]}>
             Hello Bro✌️
-          </Text>*/}
-          <Image
-            style={{ width:400, height:400}}
-            source={require('./img/img.jpeg')} />
+          </Text>
+
         </View>
         <View style={styles.secondView}>
           <Text style={[styles.txt, {color:"#626D44"}]}>
@@ -65,4 +78,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  input: {
+    color: "#FFF",
+    width: 250,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: "#FFF",
+    borderRadius: 20
+  }
 });
