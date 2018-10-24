@@ -7,32 +7,33 @@ import {
   TextInput
 } from "react-native";
 
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from "react-native-vector-icons/Ionicons";
+import Task from "./Task";
 
 export default class Body extends Component {
   state = {
-    txt: '',
+    txt: "",
     tasks: []
-  }
+  };
 
-  changeHandler=(txt)=>{
-    this.setState({txt})
-  }
+  changeHandler = txt => {
+    this.setState({ txt });
+  };
 
-  addTask=()=>{
-    const {txt} = this.state
+  addTask = () => {
+    const { txt } = this.state;
     //alert(txt)
-    var items = []
-    items = this.state.tasks//getting old tasks
-    items.unshift(txt)//adding new task
-    this.setState({tasks: items, txt: ''})
-  }
+    var items = [];
+    items = this.state.tasks; //getting old tasks
+    items.unshift(txt); //adding new task
+    this.setState({ tasks: items, txt: "" });
+  };
 
-  delete(i){
+  delete(i) {
     //alert(i)
-    var items = this.state.tasks
-    items.splice(i, 1)
-    this.setState({tasks: items})
+    var items = this.state.tasks;
+    items.splice(i, 1);
+    this.setState({ tasks: items });
   }
 
   render() {
@@ -44,25 +45,15 @@ export default class Body extends Component {
             onChangeText={this.changeHandler}
             style={styles.inp}
             value={this.state.txt}
-            placeholder='Enter your task'
-           />
+            placeholder="Enter your task"
+          />
           <View>
-            {this.state.tasks.map((task, i)=>(
-              <View key={i} style={styles.list}>
-                <Text style={styles.task}>{task}</Text>
-                <TouchableOpacity
-                  style={styles.delbtn}
-                  onPress={()=>this.delete(i)}
-                  >
-                  <Icon name='ios-trash' size={32}  />
-                </TouchableOpacity>
-              </View>
+            {this.state.tasks.map((task, i) => (
+              <Task key={i} taskName={task} del={() => this.delete(i)} />
             ))}
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={this.addTask}>
+        <TouchableOpacity style={styles.btn} onPress={this.addTask}>
           <Text style={styles.plus}>+</Text>
         </TouchableOpacity>
       </View>
@@ -87,18 +78,5 @@ var styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 42,
     alignSelf: "center"
-  },
-  list: {
-    padding: 7,
-    borderBottomWidth: 1,
-    borderColor: '#ECECEC',
-    paddingVertical: 25,
-    flexDirection: 'row'
-  },
-  delbtn: {
-    flex: 1
-  },
-  task:{
-    flex: 6
   }
 });
